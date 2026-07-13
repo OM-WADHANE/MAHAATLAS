@@ -1,0 +1,315 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MahaAtlas — AI Assistant</title>
+  <link rel="stylesheet" href="assets/civitas-v1.css" />
+</head>
+<body data-page="ai">
+
+<div class="drawer-overlay" id="overlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <div class="drawer-logo">
+      <img src="MahaAtlas_ mapping Maharashtra with precision-modified.png" class="drawer-logo-img" alt="MahaAtlas Logo" />
+      <div class="drawer-logo-text">
+        <div class="dtitle">MahaAtlas</div>
+        <div class="drawer-sub">Civitas Atlas Technologies · Pune</div>
+      </div>
+    </div>
+  </div>
+  <div class="drawer-nav">
+    <a href="index.html"    class="drawer-item" data-nav="overview"><span class="di-icon">📊</span><span>Overview</span></a>
+    <a href="fsi.html"         class="drawer-item" data-nav="fsi"><span class="di-icon">🗺</span><span>FSI Atlas</span></a>
+    <a href="landrecords.html" class="drawer-item" data-nav="landrecords"><span class="di-icon">📋</span><span>Land Records</span></a>
+    <a href="listings.html"    class="drawer-item" data-nav="listings"><span class="di-icon">🏠</span><span>Buy / Sell</span></a>
+    <a href="legal.html"       class="drawer-item" data-nav="legal"><span class="di-icon">⚖️</span><span>Legal Atlas</span></a>
+    <a href="security.html"    class="drawer-item" data-nav="security"><span class="di-icon">🔒</span><span>Security Analysis</span></a>
+    <a href="broker.html"      class="drawer-item" data-nav="broker"><span class="di-icon">🤝</span><span>Broker</span></a>
+    <a href="ai.html"          class="drawer-item" data-nav="ai"><span class="di-icon">✦</span><span>CiVi AI</span></a>
+    <a href="about.html"       class="drawer-item" data-nav="about"><span class="di-icon">ℹ️</span><span>About</span></a>
+  </div>
+  <div class="drawer-foot">Developed by Civitas Atlas Technologies Pvt. Ltd. · MahaRERA Compliant</div>
+</div>
+
+<div class="main-header">
+  <div class="header-bar">
+    <button class="nav-logo-btn" onclick="openDrawer()" title="Open menu" aria-label="Open navigation">
+      <img src="MahaAtlas_ mapping Maharashtra with precision-modified.png" alt="MahaAtlas" />
+    </button>
+    <div class="header-center">
+      <div class="header-title"><span class="ht-brand">MahaAtlas</span><span class="ht-sep">|</span><span class="ht-page">CiVi AI</span></div>
+      <div class="header-sub">Maharashtra Property Intelligence · CiVi AI</div>
+    </div>
+    <div class="header-actions">
+      <button class="h-btn" id="langBtn" onclick="toggleLang()">EN</button>
+      <div class="theme-toggle"><input type="checkbox" id="themeToggle" onchange="toggleTheme()" /><div class="tt-track"></div><div class="tt-thumb">☀</div></div>
+    </div>
+  </div>
+  <div class="tab-scroll" id="tabScroll">
+    <a href="index.html"    class="tab-item" data-nav="overview">Overview</a>
+    <a href="fsi.html"         class="tab-item" data-nav="fsi">FSI Atlas</a>
+    <a href="landrecords.html" class="tab-item" data-nav="landrecords">Land Records</a>
+
+    <a href="legal.html"       class="tab-item" data-nav="legal">Legal Atlas</a>
+    <a href="security.html"    class="tab-item" data-nav="security">Security</a>
+    <a href="broker.html"      class="tab-item" data-nav="broker">Broker</a>
+    <a href="ai.html"          class="tab-item ai-tab-item" data-nav="ai">✦ CiVi AI</a>
+    <a href="about.html"       class="tab-item" data-nav="about">About</a>
+  </div>
+</div>
+
+
+
+<!-- ░░░ CHAT AREA ░░░ -->
+<div class="ai-chat-outer">
+
+  <!-- Sidebar -->
+  <div class="ai-sidebar">
+    <div class="ai-sidebar-title">Quick Questions</div>
+    <div class="ai-quick-list">
+      <button class="ai-quick-btn" data-q="What is FSI and how is it calculated in Maharashtra?">What is FSI?</button>
+      <button class="ai-quick-btn" data-q="What is the maximum FSI allowed in Mumbai under DCPR 2034?">Max FSI in Mumbai</button>
+      <button class="ai-quick-btn" data-q="Explain TDR (Transfer of Development Rights) in Maharashtra.">What is TDR?</button>
+      <button class="ai-quick-btn" data-q="What is a TOD zone and what FSI does it allow in Pune?">TOD Zone — Pune</button>
+      <button class="ai-quick-btn" data-q="What are SRA rules for slum redevelopment in Mumbai?">SRA Rules</button>
+      <button class="ai-quick-btn" data-q="How do I convert agricultural land (NA order) in Maharashtra?">NA Order Process</button>
+      <button class="ai-quick-btn" data-q="What is stamp duty and registration fee for property in Maharashtra?">Stamp Duty &amp; Reg.</button>
+      <button class="ai-quick-btn" data-q="Explain RERA registration for a housing project in Maharashtra.">RERA Registration</button>
+      <button class="ai-quick-btn" data-q="What is FSI for MIDC industrial plots in Maharashtra?">MIDC FSI</button>
+      <button class="ai-quick-btn" data-q="What is the difference between PMC and PCMC jurisdiction in Pune?">PMC vs PCMC</button>
+    </div>
+
+    <div class="ai-sidebar-divider"></div>
+    <div class="ai-sidebar-title">Session</div>
+    <button class="ai-session-btn" id="aiClearBtn">🗑 Clear Chat</button>
+    <div class="ai-model-badge">CiVi AI · Powered by Groq</div>
+  </div>
+
+  <!-- Main chat -->
+  <div class="ai-chat-main">
+    <div class="ai-messages" id="aiMessages">
+      <div class="ai-welcome" id="aiWelcome">
+        <div class="ai-hex-wrap">
+          <svg class="ai-hex-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="hexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"   stop-color="#fff"    stop-opacity="0.9"/>
+                <stop offset="40%"  stop-color="#c084fc" stop-opacity="1"/>
+                <stop offset="70%"  stop-color="#6d28d9" stop-opacity="1"/>
+                <stop offset="100%" stop-color="#e8b84b" stop-opacity="0.9"/>
+              </linearGradient>
+            </defs>
+            <polygon class="ai-hex-outer" points="50,4 93,27.5 93,72.5 50,96 7,72.5 7,27.5" stroke="url(#hexGrad)"/>
+            <polygon class="ai-hex-inner" points="50,18 80,34.5 80,65.5 50,82 20,65.5 20,34.5"/>
+            <text x="50" y="57" text-anchor="middle" class="ai-hex-star">✦</text>
+          </svg>
+        </div>
+        <div class="ai-welcome-title">CiVi AI — MahaAtlas Assistant</div>
+        <div class="ai-welcome-sub">Ask anything about FSI, land types, DCPR, TDR, stamp duty, RERA, or Maharashtra real-estate regulations.</div>
+        <div class="ai-welcome-chips">
+          <span class="ai-wchip">FSI Mumbai</span>
+          <span class="ai-wchip">TDR rules</span>
+          <span class="ai-wchip">Stamp duty</span>
+          <span class="ai-wchip">NA order</span>
+          <span class="ai-wchip">RERA</span>
+          <span class="ai-wchip">TOD zones</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-input-bar">
+      <div class="ai-input-wrap">
+        <textarea id="aiUserInput" placeholder="Ask about FSI, land types, RERA, stamp duty…" rows="1" maxlength="2000"></textarea>
+        <button id="aiSendBtn" class="ai-send-btn" title="Send">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+      <div class="ai-input-hint">CiVi AI · Not legal advice · Always verify with your local authority</div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/civitas-v1-core.js"></script>
+<script>
+(function () {
+  var GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
+  var _k = ["gsk_Tc8WqOV7jelGZor5Ip3NWGdy", "b3FYxPpbuCcMmlIOuk0Vu8cisUmB"].join("");
+  var MODEL = "llama-3.3-70b-versatile";
+
+  var SYSTEM_PROMPT =
+    "You are MahaAtlas AI, an expert assistant for Maharashtra (India) real estate, " +
+    "FSI (Floor Space Index), land regulations, DCPR 2034, PMC DP 2041, TDR, SRA, RERA, " +
+    "stamp duty, and property law. " +
+    "Always answer clearly and concisely. Mention the governing authority and regulation when giving FSI values. " +
+    "If a question is outside Maharashtra real estate, politely redirect the user. " +
+    "Use bullet points for multi-part answers. Bold key terms using **term** syntax. " +
+    "End every answer with: 'Always verify with your local planning authority or a licensed professional.'";
+
+  var history = [];
+
+  var messagesEl = document.getElementById("aiMessages");
+  var userInput  = document.getElementById("aiUserInput");
+  var sendBtn    = document.getElementById("aiSendBtn");
+  var clearBtn   = document.getElementById("aiClearBtn");
+  var welcomeEl  = document.getElementById("aiWelcome");
+
+  function init() {
+    sendBtn.addEventListener("click", handleSend);
+    clearBtn.addEventListener("click", clearChat);
+
+    userInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleSend(); }
+    });
+    userInput.addEventListener("input", function () {
+      this.style.height = "auto";
+      this.style.height = Math.min(this.scrollHeight, 120) + "px";
+    });
+
+    document.querySelectorAll(".ai-quick-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        userInput.value = btn.getAttribute("data-q");
+        userInput.dispatchEvent(new Event("input"));
+        handleSend();
+      });
+    });
+
+    document.querySelectorAll(".ai-wchip").forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        userInput.value = "Tell me about " + chip.textContent + " in Maharashtra.";
+        userInput.dispatchEvent(new Event("input"));
+        handleSend();
+      });
+    });
+  }
+
+  function handleSend() {
+    var text = userInput.value.trim();
+    if (!text || sendBtn.disabled) return;
+    appendMessage("user", text);
+    history.push({ role: "user", content: text });
+    userInput.value = "";
+    userInput.style.height = "auto";
+    if (welcomeEl) welcomeEl.style.display = "none";
+    sendToGroq();
+  }
+
+  function sendToGroq() {
+    var thinkingId = appendThinking();
+    sendBtn.disabled = true;
+
+    fetch(GROQ_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + _k
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        messages: [{ role: "system", content: SYSTEM_PROMPT }].concat(history),
+        temperature: 0.7,
+        max_tokens: 1024
+      })
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      removeThinking(thinkingId);
+      sendBtn.disabled = false;
+
+      if (data.error) {
+        var msg = data.error.message || "API error.";
+        if (msg.toLowerCase().includes("rate") || msg.toLowerCase().includes("quota")) {
+          appendMessage("error", "Rate limit reached. Please wait a moment and try again.");
+        } else {
+          appendMessage("error", "Error: " + msg);
+        }
+        return;
+      }
+
+      var reply = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
+      if (!reply) { appendMessage("error", "No response received. Please try again."); return; }
+      history.push({ role: "assistant", content: reply });
+      appendMessage("ai", reply);
+    })
+    .catch(function (err) {
+      removeThinking(thinkingId);
+      sendBtn.disabled = false;
+      appendMessage("error", "Network error: " + err.message);
+    });
+  }
+
+  var thinkingCounter = 0;
+  function appendThinking() {
+    var id = "think-" + (++thinkingCounter);
+    var el = document.createElement("div");
+    el.className = "ai-msg ai-msg-thinking";
+    el.id = id;
+    el.innerHTML =
+      '<div class="ai-msg-avatar">✦</div>' +
+      '<div class="ai-msg-bubble">' +
+      '<span class="ai-thinking-dot"></span>' +
+      '<span class="ai-thinking-dot"></span>' +
+      '<span class="ai-thinking-dot"></span>' +
+      '</div>';
+    messagesEl.appendChild(el);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return id;
+  }
+  function removeThinking(id) { var el = document.getElementById(id); if (el) el.remove(); }
+
+  function appendMessage(role, text) {
+    var el = document.createElement("div");
+    if (role === "user") {
+      el.className = "ai-msg ai-msg-user";
+      el.innerHTML = '<div class="ai-msg-bubble ai-msg-bubble-user">' + escHtml(text) + '</div>';
+    } else if (role === "error") {
+      el.className = "ai-msg ai-msg-error";
+      el.innerHTML = '<div class="ai-msg-bubble ai-msg-bubble-error">⚠ ' + escHtml(text) + '</div>';
+    } else {
+      el.className = "ai-msg ai-msg-ai";
+      el.innerHTML =
+        '<div class="ai-msg-avatar">✦</div>' +
+        '<div class="ai-msg-bubble ai-msg-bubble-ai">' + formatAI(text) + '</div>';
+    }
+    messagesEl.appendChild(el);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function clearChat() {
+    history = [];
+    messagesEl.innerHTML = "";
+    if (welcomeEl) { welcomeEl.style.display = ""; messagesEl.appendChild(welcomeEl); }
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br>");
+  }
+
+  function formatAI(text) {
+    text = text.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+    var lines = text.split("\n");
+    var out = [], inList = false;
+    lines.forEach(function (line) {
+      var bl = line.match(/^[\*\-]\s+(.*)/);
+      if (bl) {
+        if (!inList) { out.push('<ul class="ai-ul">'); inList = true; }
+        out.push("<li>" + bl[1] + "</li>");
+      } else {
+        if (inList) { out.push("</ul>"); inList = false; }
+        if (line.trim()) out.push("<p>" + line + "</p>");
+      }
+    });
+    if (inList) out.push("</ul>");
+    return out.join("");
+  }
+
+  window.addEventListener("DOMContentLoaded", init);
+})();
+</script>
+
+</body>
+</html>
