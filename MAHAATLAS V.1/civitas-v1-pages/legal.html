@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MahaAtlas — Legal Hub</title>
+  <link rel="stylesheet" href="assets/civitas-v1.css" />
+</head>
+<body data-page="legal">
+<div class="drawer-overlay" id="overlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <div class="drawer-logo">
+      <img src="MahaAtlas_ mapping Maharashtra with precision-modified.png" class="drawer-logo-img" alt="MahaAtlas Logo" />
+      <div class="drawer-logo-text">
+        <div class="dtitle">MahaAtlas</div>
+        <div class="drawer-sub">Civitas Atlas Technologies · Pune</div>
+      </div>
+    </div>
+  </div>
+  <div class="drawer-nav">
+    <a href="overview.html" class="drawer-item" data-nav="overview"><span class="di-icon">📊</span><span>Overview</span></a>
+    <a href="fsi.html" class="drawer-item" data-nav="fsi"><span class="di-icon">🗺</span><span>FSI Atlas</span></a>
+    <a href="landrecords.html" class="drawer-item" data-nav="landrecords"><span class="di-icon">📋</span><span>Land Records</span></a>
+    <a href="listings.html" class="drawer-item" data-nav="listings"><span class="di-icon">🏠</span><span>Buy / Sell</span></a>
+    <a href="legal.html" class="drawer-item" data-nav="legal"><span class="di-icon">⚖️</span><span>Legal Hub</span></a>
+    <a href="security.html" class="drawer-item" data-nav="security"><span class="di-icon">🔒</span><span>Security Analysis</span></a>
+    <a href="broker.html" class="drawer-item" data-nav="broker"><span class="di-icon">🤝</span><span>Broker</span></a>
+    <a href="ai.html" class="drawer-item" data-nav="ai"><span class="di-icon">✦</span><span>CiVi AI</span></a>
+    <a href="about.html" class="drawer-item" data-nav="about"><span class="di-icon">ℹ️</span><span>About</span></a>
+  </div>
+  <div class="drawer-foot">Developed by Civitas Atlas Technologies Pvt. Ltd. · MahaRERA Compliant</div>
+</div>
+
+<div class="main-header">
+  <div class="header-bar">
+    <button class="nav-logo-btn" onclick="openDrawer()" title="Open menu" aria-label="Open navigation">
+      <img src="MahaAtlas_ mapping Maharashtra with precision-modified.png" alt="MahaAtlas" />
+    </button>
+    <div class="header-center">
+      <div class="header-title" id="headerTitle">Legal Hub</div>
+      <div class="header-sub">MahaAtlas · Maharashtra Property Intelligence</div>
+    </div>
+    <div class="header-actions">
+      <button class="h-btn active-lang" id="langBtn" onclick="toggleLang()">EN</button>
+      <div class="theme-toggle"><input type="checkbox" id="themeToggle" onchange="toggleTheme()" /><div class="tt-track"></div><div class="tt-thumb">☀</div></div>
+    </div>
+  </div>
+  <div class="tab-scroll" id="tabScroll">
+    <a href="overview.html" class="tab-item" data-nav="overview">Overview</a>
+    <a href="fsi.html" class="tab-item" data-nav="fsi">FSI Atlas</a>
+    <a href="landrecords.html" class="tab-item" data-nav="landrecords">Land Records</a>
+    <a href="listings.html" class="tab-item" data-nav="listings">Buy / Sell</a>
+    <a href="legal.html" class="tab-item" data-nav="legal">Legal Hub</a>
+    <a href="security.html" class="tab-item" data-nav="security">Security</a>
+    <a href="broker.html" class="tab-item" data-nav="broker">Broker</a>
+    <a href="ai.html" class="tab-item ai-tab-item" data-nav="ai">✦ CiVi AI</a>
+    <a href="about.html" class="tab-item" data-nav="about">About</a>
+  </div>
+</div>
+
+<div id="clients-mount"></div>
+
+<div class="content">
+<div class="section active" id="tab-legal">
+  <div class="calc-card">
+    <h3>Stamp Duty & Registration Calculator <span>Maharashtra Stamp Act 1958</span></h3>
+    <div class="form-row2">
+      <div class="form-field"><label>Transaction Type</label><select id="txType" onchange="calcStamp()"><option value="sale">Sale Agreement</option><option value="gift">Gift Deed</option><option value="lease">Lease/Rent Agmt.</option><option value="mortgage">Mortgage Deed</option><option value="partition">Partition Deed</option></select></div>
+      <div class="form-field"><label>Location</label><select id="txLoc" onchange="calcStamp()"><option value="mumbai">Mumbai (MCGM)</option><option value="pune">Pune / Nagpur / Other</option><option value="rural">Rural / Other</option></select></div>
+    </div>
+    <div class="form-row2">
+      <div class="form-field"><label>Agreement Value (₹)</label><input type="number" id="propVal" value="5000000" oninput="calcStamp()"/></div>
+      <div class="form-field"><label>Ready Reckoner (₹)</label><input type="number" id="rrVal" value="4800000" oninput="calcStamp()"/></div>
+    </div>
+    <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);cursor:pointer;margin-bottom:8px;"><input type="checkbox" id="womanBuyer" onchange="calcStamp()" style="accent-color:var(--p);"> Woman as primary buyer (1% concession)</label>
+    <div class="calc-result" id="stampOut">
+      <div class="cr-label">Total Government Outgo</div>
+      <div class="cr-amount" id="totalOut">₹—</div>
+      <div class="cr-rows" id="stampRows"></div>
+    </div>
+  </div>
+  <div class="law-card">
+    <h3>Key Maharashtra Property Laws</h3>
+    <div class="law-item"><span class="law-code">MahaRERA</span><div class="law-body"><div class="lw-t">Real Estate (Regulation & Development) Act, 2016</div><div class="lw-d">Mandatory registration for projects &gt;500 sq.m. or 8+ units. 70% escrow. Delivery timelines legally enforceable.</div></div></div>
+    <div class="law-item"><span class="law-code">MOFA 1963</span><div class="law-body"><div class="lw-t">Maharashtra Ownership Flats Act</div><div class="lw-d">Promoter obligations, society formation within 4 months, conveyance of land mandatory.</div></div></div>
+    <div class="law-item"><span class="law-code">MRTP 1966</span><div class="law-body"><div class="lw-t">Maharashtra Regional & Town Planning Act</div><div class="lw-d">FSI zones, DP/TP schemes, NA permissions (Sec. 44/45), Change of Land Use (CLU).</div></div></div>
+    <div class="law-item"><span class="law-code">MLR Code</span><div class="law-body"><div class="lw-t">Maharashtra Land Revenue Code, 1966</div><div class="lw-d">7/12 records, mutations, NA conversion, tribal land restrictions (Sec. 36), agricultural ceiling.</div></div></div>
+    <div class="law-item"><span class="law-code">MRC Act</span><div class="law-body"><div class="lw-t">Maharashtra Rent Control Act, 1999</div><div class="lw-d">Urban tenant protections, standard rent, eviction grounds, pagdi/kholi system in Mumbai.</div></div></div>
+    <div class="law-item"><span class="law-code">MSA 1958</span><div class="law-body"><div class="lw-t">Maharashtra Stamp Act, 1958</div><div class="lw-d">Stamp duty on all instruments. Higher of agreement value or Ready Reckoner (ASR) applies.</div></div></div>
+  </div>
+</div>
+</div>
+
+<footer class="site-footer-v1">
+  Civitas Atlas Technologies Pvt. Ltd. · MahaRERA Compliant ·
+  <a href="https://civitasatlas.vercel.app" target="_blank" rel="noopener noreferrer">civitasatlas.vercel.app</a>
+</footer>
+
+  <!-- CiVi AI floating button -->
+  <a href="ai.html" class="civi-ai-fab" title="Ask CiVi AI">
+    <div class="civi-ai-fab-icon">✦</div>
+    <div class="civi-ai-fab-label">
+      <span class="civi-ai-fab-name">CiVi AI</span>
+      <span class="civi-ai-fab-sub">Ask anything</span>
+    </div>
+  </a>
+
+  <script src="assets/civitas-v1-core.js"></script>
+  <script src="assets/civitas-v1-legal.js"></script>
+
+</body>
+</html>
